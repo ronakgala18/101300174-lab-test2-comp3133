@@ -1,0 +1,25 @@
+<div *ngIf="mission">
+    <h2>{{ mission.mission_name }}</h2>
+    <div>
+      <span class="label">Flight Number:</span> {{ mission.flight_number }}
+    </div>
+    <div>
+      <span class="label">Mission ID:</span>
+      <ul>
+        <li *ngFor="let id of mission.mission_id">{{ id }}</li>
+      </ul>
+    </div>
+    <div>
+      <span class="label">Launch Year:</span> {{ mission.launch_year }}
+    </div>
+    <div>
+      <span class="label">Successful Launch:</span> {{ mission.launch_success }}
+    </div>
+    <div>
+      <span class="label">Successful Landing:</span> {{ mission.rocket.first_stage.cores[0].land_success }}
+    </div>
+    <div>
+      <span class="label">Details:</span> {{ mission.details }}
+    </div>
+  </div>
+  

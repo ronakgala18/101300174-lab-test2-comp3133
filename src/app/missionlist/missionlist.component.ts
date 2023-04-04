@@ -1,5 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { SpacexapiService } from '../network/spacexapi.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Mission } from '../models/mission.model';
 
 @Component({
@@ -8,13 +10,32 @@ import { Mission } from '../models/mission.model';
   styleUrls: ['./missionlist.component.css']
 })
 export class MissionlistComponent implements OnInit {
-  missions!: Mission[];
+  missions: Mission[] = [];
+  selectedYear: string = '';
 
-  constructor(private http: HttpClient) { }
+  constructor(private SpacexapiService: SpacexapiService, private router: Router) { }
 
   ngOnInit(): void {
-    this.http.get('https://api.spacexdata.com/v3/launches').subscribe(data => {
-      this.missions = data as any[];
+    this.getMissions();
+  }
+
+  getMissions() {
+    this.SpacexapiService.getMissions().subscribe((missions: Mission[]) => {
+      this.missions = missions;
     });
+  }
+
+  showMissionDetails(flightNumber: string) {
+    this.router.navigate(['/missiondetails', flightNumber]);
+  }
+
+  filterMissions() {
+    if (this.selectedYear === '') {
+      this.getMissions();
+    } else {
+      this.SpacexapiService.filterMissionsByYear(this.selectedYear).subscribe((missions: Mission[]) => {
+        this.missions = missions;
+      });
+    }
   }
 }

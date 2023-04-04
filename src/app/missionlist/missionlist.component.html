@@ -1,17 +1,24 @@
-
+<div class="filter-bar">
+    <label>Filter Year:</label>
+    <select [(ngModel)]="selectedYear" (change)="filterMissions()">
+      <option value="">All Years</option>
+      <option *ngFor="let mission of missions | orderBy: 'launch_year'" [value]="mission.launch_year">{{ mission.launch_year  }} </option>
+    </select>
+  </div>
   
-  <div class="" *ngFor="let mission of missions">
-    <div class="container">
-        <img [src]="mission.links.mission_patch_small" alt="Logo" class="logo">
-        <div class="info">
-            <div class="tittle-year">
-                <h1 class="title">{{ mission.mission_name }}</h1>
-                <h3 class="year">{{ mission.launch_year }}</h3>
-            </div>
-            <br>
-            <p class="text">{{ mission.details }}</p>
-        </div>
+  <div class="mission-list">
+    <div class="mission" *ngFor="let mission of missions">
+      <div class="mission-header">
+        <img src="{{ mission.links.mission_patch_small }}" alt="{{ mission.mission_name }} logo">
+      </div>
+      <div class="mission-body">
+        <h2 style="text-align: center;">{{ mission.mission_name }}</h2>
+        <h3>Mission Ids :  {{mission.mission_id}}</h3>
+        <h4>Launch year : {{ mission.launch_year }}</h4>
+        <h4>Successful Launch : {{ mission.launch_success?"Yes":"No"}}</h4>
+        <h4>Successful Landing : {{ mission.rocket.first_stage.cores[0].land_success?"Yes":"No Data" }}</h4>
+      <button class="mission-button" (click)="showMissionDetails(mission.flight_number)">View Details</button>
     </div>
-    <br>
+    </div>
   </div>
   
