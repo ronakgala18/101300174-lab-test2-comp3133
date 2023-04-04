@@ -1,25 +1,18 @@
-<div *ngIf="mission">
-    <h2>{{ mission.mission_name }}</h2>
-    <div>
-      <span class="label">Flight Number:</span> {{ mission.flight_number }}
+<div mat-dialog-content class="dialog">
+    <img src="{{ mission.links.mission_patch_small }}" alt="Mission Patch" style="display:inline-block; float:left; margin-right:20px; width: 180px;">
+    <div style="display:inline-block;">
+        <h1>Mission - {{ mission.mission_name }}</h1>
+        <p>Mission Id: {{ mission.mission_id}}</p>
+        <p>Launch Year: {{ mission.launch_year }}</p>
+        <h2>Rocket</h2>
+        <p>Name: {{ mission.rocket.rocket_name }}</p>
+        <p>Type: {{ mission.rocket.rocket_type }}</p>
     </div>
-    <div>
-      <span class="label">Mission ID:</span>
-      <ul>
-        <li *ngFor="let id of mission.mission_id">{{ id }}</li>
-      </ul>
-    </div>
-    <div>
-      <span class="label">Launch Year:</span> {{ mission.launch_year }}
-    </div>
-    <div>
-      <span class="label">Successful Launch:</span> {{ mission.launch_success }}
-    </div>
-    <div>
-      <span class="label">Successful Landing:</span> {{ mission.rocket.first_stage.cores[0].land_success }}
-    </div>
-    <div>
-      <span class="label">Details:</span> {{ mission.details }}
-    </div>
-  </div>
-  
+    <br><br>
+    <h3>Launch site :</h3>
+    <p>{{mission.launch_site.site_name_long}}</p>
+    <h3>Launch Details</h3>
+    <P>{{mission.details}}</P>
+
+    <br>
+</div>

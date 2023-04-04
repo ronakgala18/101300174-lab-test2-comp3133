@@ -10,12 +10,19 @@ export class Mission {
     flight_number: string;
     launch_date_local: Date;
     launch_success!: boolean;
+    launch_site!: {
+        site_name_long: string
+    };
+    
+    nationality!:string;
     rocket!: {
         first_stage: {
           cores: {
             land_success: boolean;
           }[];
         };
+        rocket_name: string;
+        rocket_type: string;
       };
     mission_id!:string[] ;
     
